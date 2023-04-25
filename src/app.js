@@ -55,8 +55,7 @@ app.put('/stress/:elemento/tempostress/:tempoStress/intervalo/:intervalo/ciclos/
 
 app.use('/api/produto', product);
 
-var developer_db_url = 'mongodb://mongouser:mongopwd@localhost:27017/admin';
-var mongoUrl = process.env.MONGODB_URI || developer_db_url;
+var mongoUrl = process.env.MONGODB_URI;
 
 mongoose.Promise = global.Promise;
 
