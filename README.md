@@ -1,3 +1,11 @@
+### Executar com Docker Compose
+
+```
+ docker compose --env-file ./.env up -d --build
+```
+
+### Executar sem Docker Compose
+
 Docker Network
 
 ```

@@ -1,0 +1,34 @@
+version: '3.8'
+
+volumes:
+  mongo_vol:
+
+networks:
+  produto_net:
+    driver: 'bridge'
+
+services:
+  api:
+    image: brenootsuka/api-produto:${TAG}
+    build: 
+      dockerfile: Dockerfile
+      context: ./
+    ports:
+      - 8080:8080
+    networks:
+      - produto_net
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27017/admin
+  mongodb:
+    image: mongo:4.4.3
+    ports:
+      - 27017:27017
+    networks:
+      - produto_net
+    volumes:
+      - mongo_vol:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
